@@ -17,6 +17,10 @@
       Battleship server was upgraded to version <span id="server-version">1</span>.
       <a id="server-upgrade" href="#">Refresh page</a> to take advantage of latest features.
     </div>
+    <div class="server-closed-alert alert alert-danger alert-dismissible" style="display: none;">
+      <button type="button" class="close" data-dismiss="alert">&times</button>
+      <strong>Server Closed.</strong> Thank You! Come again!
+    </div>
     <div class="container-fluid">
       <div class="row">
         <div class="col-lg-4">
@@ -344,13 +348,19 @@
           }
         });
 
+        socket.on('server closed', function() {
+          $('.upgrade-alert').hide('slow');
+          $('.server-closed-alert').show('slow');
+        });
+
         socket.on('server version', function(version) {
+          $('.server-closed-alert').hide('slow');
           var currentVersion = $('body').attr('data-battleship-version');
           if (!currentVersion) {
             $('body').attr('data-battleship-version', version);
           } else if (currentVersion != version) {
             $('#server-version').text(version);
-            $('.upgrade-alert').show();
+            $('.upgrade-alert').show('slow');
           }
         });
 
