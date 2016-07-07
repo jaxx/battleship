@@ -291,13 +291,18 @@
         });
 
         $('form').submit(function() {
-          socket.emit('chat message', $('#m').val());
-          $('#m').val('');
+          var msg = $('#m').val();
+          if ($.trim(msg)) {
+            socket.emit('chat message', msg);
+            $('#m').val('');
+          }
           return false;
         });
 
-        socket.on('chat message', function(msg){
-          $('#messages').append($('<li>').text(msg));
+        socket.on('chat message', function(msg) {
+          if ($.trim(msg)) {
+            $('#messages').append($('<li>').text(msg));
+          }
         });
 
         socket.on('server version', function(version) {
