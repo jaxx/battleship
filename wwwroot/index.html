@@ -3,6 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="Expires" content="-1">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Battleship</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -264,9 +266,9 @@
       </div>
     </div>
 
-    
 
-    
+
+
     <ul id="messages"></ul>
     <form action="">
       <input id="m" type="text" class="form-control" autocomplete="off" />
@@ -286,6 +288,15 @@
 
         socket.on('chat message', function(msg){
           $('#messages').append($('<li>').text(msg));
+        });
+
+        socket.on('server version', function(version) {
+          var currentVersion = $('body').attr('data-battleship-version');
+          if (!currentVersion) {
+            $('body').attr('data-battleship-version', version);
+          } else if (currentVersion != version) {
+            location.reload(true);
+          }
         });
 
 
