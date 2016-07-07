@@ -299,9 +299,27 @@
           return false;
         });
 
+        var entityMap = {
+          "&": "&amp;",
+          "<": "&lt;",
+          ">": "&gt;",
+          '"': '&quot;',
+          "'": '&#39;'
+        };
+
+        function escapeHtml(string) {
+          return String(string).replace(/[&<>"']/g, function (s) {
+            return entityMap[s];
+          });
+        }
+
         socket.on('chat message', function(msg) {
           if ($.trim(msg)) {
-            $('#messages').append($('<li>').text(msg));
+            msg = escapeHtml(msg);
+            msg = msg.replace(/(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/g, function(m) {
+              return '<a href="' + m + '">' + m + '</a>';
+            });
+            $('#messages').append($('<li>').html(msg));
           }
         });
 
