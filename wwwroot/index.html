@@ -11,6 +11,12 @@
     <link href="css/site.css" rel="stylesheet">
   </head>
   <body>
+    <div class="upgrade-alert alert alert-success alert-dismissible" style="display: none;">
+      <button type="button" class="close" data-dismiss="alert">&times</button>
+      <strong>Server Upgrade.</strong>
+      Battleship server was upgraded to version <span id="server-version">1</span>.
+      <a id="server-upgrade" href="#">Refresh page</a> to take advantage of latest features.
+    </div>
     <div class="board-container">
       <div><h3>Your board</h3></div>
       <div>
@@ -280,6 +286,10 @@
     <script>
         var socket = io();
 
+        $('#server-upgrade').on('click', function() {
+          location.reload();
+        });
+
         $('form').submit(function() {
           socket.emit('chat message', $('#m').val());
           $('#m').val('');
@@ -295,7 +305,9 @@
           if (!currentVersion) {
             $('body').attr('data-battleship-version', version);
           } else if (currentVersion != version) {
-            location.reload(true);
+            $('#server-version').text(version);
+            $('.upgrade-alert').toggle();
+            //location.reload(true);
           }
         });
 
