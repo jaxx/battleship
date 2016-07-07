@@ -329,8 +329,7 @@
             $('body').attr('data-battleship-version', version);
           } else if (currentVersion != version) {
             $('#server-version').text(version);
-            $('.upgrade-alert').toggle();
-            //location.reload(true);
+            $('.upgrade-alert').show();
           }
         });
 
