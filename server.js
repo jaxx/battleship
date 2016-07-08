@@ -24,20 +24,20 @@ io.on('connection', function(socket) {
     console.log('connection opened [%s] ...', socket.id);
     socket.emit('server version', config.version);
 
-    socket.on('identify', function(userName) {
+    socket.on('identify', function(username) {
         socket.removeAllListeners('identify');
 
-        console.log("user identified: %s [%s]", userName, socket.id);
-        io.emit('user connected', userName);
+        console.log("user identified: %s [%s]", username, socket.id);
+        io.emit('user connected', username);
 
         socket.on('disconnect', function() {
-            console.log('user `%s` disconnected', userName);
-            io.emit('user disconnected', userName);
+            console.log('user `%s` disconnected', username);
+            io.emit('user disconnected', username);
         });
 
         socket.on('chat message', function(text) {
             if (text.trim()) {
-                io.emit('chat message', { userName: userName, text: text });
+                io.emit('chat message', { username: username, text: text });
             }
         });
     });

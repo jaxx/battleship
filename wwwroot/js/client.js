@@ -9,15 +9,35 @@ $(document).ready(function() {
     // Sends login request with selected user name to server.
     $("#login").on("click", function(e) {
         e.preventDefault();
-        var username = $("#username").val().trim();
-        if (username) {
+        var username = $("#username").val();
+        if ($.trim(username)) {
             $("#usernameModal").modal("hide");
             socket.emit("identify", username);
-        } else{
-            $("#username-group").addClass("has-error");
+        } else {
+            $("#username").wrap("<div class='has-error'>");
             $("#username").focus();
         }
     });
+
+/*
+    var mouseIsDown = false;
+    $("#board").on("mousedown", function() {
+        mouseIsDown = true;
+        console.log("Mouse is down");
+    });
+
+    $("#board").on("mouseup", function() {
+        mouseIsDown = false;
+        console.log("Mouse is up");
+    })
+
+    $("board").on("mouseover", function(evt) {
+        console.log("Mouse is over.");
+        if (mouseIsDown) {
+            console.log(evt.target);
+        }
+    });
+*/
 
     // Send chat message (if anything is written in message box).
     $("form").submit(function() {
