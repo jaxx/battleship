@@ -138,7 +138,7 @@ $(document).ready(function() {
             .addClass("list-group-item list-group-item-danger")
             .append($("<span>").addClass("glyphicon glyphicon-log-out"))
             .append(" ")
-            .append($("<strong>").text(userName))
+            .append($("<strong>").text(username))
             .append(" logged out &hellip;"));
     });
 
