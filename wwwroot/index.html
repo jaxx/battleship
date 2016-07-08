@@ -354,7 +354,14 @@
             });
             msg = msg.replace(/\(\w+\)/g, function(m) {
               switch (m) {
+                case '(doh)': return '<img alt="' + m + '" src="https://az705183.vo.msecnd.net/onlinesupportmedia/onlinesupport/media/skype/screenshots/fa12330/emoticons/doh_80_anim_gif.gif" />';
+                case '(facepalm)': return '<img alt="' + m + '" src="https://az705183.vo.msecnd.net/onlinesupportmedia/onlinesupport/media/skype/screenshots/fa12330/emoticons/facepalm_80_anim_gif.gif" />';
                 case '(monkey)': return '<img alt="' + m + '" src="https://az705183.vo.msecnd.net/onlinesupportmedia/onlinesupport/media/skype/screenshots/fa12330/emoticons/monkey_80_anim_gif.gif" />';
+                case '(nerd)': return '<img alt="' + m + '" src="https://az705183.vo.msecnd.net/onlinesupportmedia/onlinesupport/media/skype/screenshots/fa12330/emoticons/nerd_80_anim_gif.gif" />';
+                case '(party)': return '<img alt="' + m + '" src="https://az705183.vo.msecnd.net/onlinesupportmedia/onlinesupport/media/skype/screenshots/fa12330/emoticons/party_80_anim_gif.gif" />';
+                case '(wait)': return '<img alt="' + m + '" src="https://az705183.vo.msecnd.net/onlinesupportmedia/onlinesupport/media/skype/screenshots/fa12330/emoticons/wait_80_anim_gif.gif" />';
+                case '(wave)': return '<img alt="' + m + '" src="https://az705183.vo.msecnd.net/onlinesupportmedia/onlinesupport/media/skype/screenshots/fa12330/emoticons/hi_80_anim_gif.gif" />';
+                case '(yawn)': return '<img alt="' + m + '" src="https://az705183.vo.msecnd.net/onlinesupportmedia/onlinesupport/media/skype/screenshots/fa12330/emoticons/yawning_80_anim_gif.gif" />';
                 default: return m;
               }
             })
