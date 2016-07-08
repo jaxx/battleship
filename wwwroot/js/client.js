@@ -9,10 +9,10 @@ $(document).ready(function() {
     // Sends login request with selected user name to server.
     $("#login").on("click", function(e) {
         e.preventDefault();
-        var userName = $("#username").val().trim();
-        if (userName) {
+        var username = $("#username").val().trim();
+        if (username) {
             $("#usernameModal").modal("hide");
-            socket.emit("identify", userName);
+            socket.emit("identify", username);
         } else{
             $("#username-group").addClass("has-error");
             $("#username").focus();
