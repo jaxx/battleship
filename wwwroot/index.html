@@ -21,6 +21,22 @@
       <button type="button" class="close" data-dismiss="alert">&times</button>
       <strong>Server Closed.</strong> Thank You! Come again!
     </div>
+    <div id="usernameModal" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Please enter username</h4>
+          </div>
+          <div class="modal-body">
+            <label for="username" class="sr-only">Username</label>
+            <input type="text" id="username" class="form-control" placeholder="Username" required autofocus>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Let's play</button>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="container-fluid">
       <div class="row">
         <div class="col-lg-4">
@@ -364,26 +380,17 @@
           }
         });
 
+        $(window).on('load', function() {
+          $('#usernameModal').modal({
+            backdrop: 'static',
+            keyboard: false
+          });
+        }).load()
+
         $(window).on('resize', function() {
           $("#chat-container").height($(this).height() - 100);
           $("#chat-container").css('max-height', $(this).height() - 100);
         }).resize()
-
-
-
-
-
-
-
-/*
-        $('#circle').mouseenter(function() {
-          $('#circle').attr('fill', 'black')
-        });
-
-        $('#circle').mouseleave(function() {
-          $('#circle').attr('fill', 'yellow')
-        });
-*/
     </script>
   </body>
 </html>
