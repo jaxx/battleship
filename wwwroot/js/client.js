@@ -13,6 +13,9 @@ $(document).ready(function() {
         if (userName) {
             $("#usernameModal").modal("hide");
             socket.emit("identify", userName);
+        } else{
+            $("#username-group").addClass("has-error");
+            $("#username").focus();
         }
     });
 
