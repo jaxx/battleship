@@ -6,6 +6,16 @@ $(document).ready(function() {
         location.reload();
     });
 
+    // Sends login request with selected user name to server.
+    $("#login").on("click", function(e) {
+        e.preventDefault();
+        var userName = $("#username").val().trim();
+        if (userName) {
+            $("#usernameModal").modal("hide");
+            socket.emit("identify", userName);
+        }
+    });
+
     // Send chat message (if anything is written in message box).
     $("form").submit(function() {
         var msg = $("#m").val();
@@ -122,14 +132,4 @@ $(document).ready(function() {
         $("#chat-container").height($(this).height() - 100);
         $("#chat-container").css("max-height", $(this).height() - 100);
     }).resize();
-
-    // Sends selected user name to server.
-    $("#usernameModal button").on("click", function() {
-        var userName = $("#username").val();
-        if ($.trim(userName)) {
-            socket.emit("identify", userName);
-        } else {
-            return false;
-        }
-    });
 });

@@ -25,6 +25,8 @@ io.on('connection', function(socket) {
     socket.emit('server version', config.version);
 
     socket.on('identify', function(userName) {
+        socket.off('identify');
+
         console.log("user identified: %s [%s]", userName, socket.id);
         io.emit('user connected', userName);
 
