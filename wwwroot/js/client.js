@@ -96,7 +96,7 @@ $(document).ready(function() {
             $messages.append(
                 $("<li>")
                     .addClass("list-group-item")
-                    .append($("<h4>").addClass("list-group-item-heading").text(msg.userName))
+                    .append($("<h4>").addClass("list-group-item-heading").text(msg.username))
                     .append($("<p>").addClass("list-group-item-text").html(text)));
             $messages.parent().animate({ scrollTop: $messages.parent()[0].scrollHeight }, "slow");
         }
@@ -121,18 +121,18 @@ $(document).ready(function() {
     });
 
     // Handles new connecting user event.
-    socket.on("user connected", function(userName) {
+    socket.on("user connected", function(username) {
         $("#messages")
             .append($("<li>")
             .addClass("list-group-item list-group-item-success")
             .append($("<span>").addClass("glyphicon glyphicon-log-in"))
             .append(" ")
-            .append($("<strong>").text(userName))
+            .append($("<strong>").text(username))
             .append(" logged on &hellip;"));
     });
 
     // Handles user leaving event.
-    socket.on("user disconnected", function(userName) {
+    socket.on("user disconnected", function(username) {
         $("#messages")
             .append($("<li>")
             .addClass("list-group-item list-group-item-danger")
