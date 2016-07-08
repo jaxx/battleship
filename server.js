@@ -10,6 +10,7 @@ app.use('/', express.static(__dirname + '/wwwroot'));
 app.use('/js', express.static(__dirname + '/node_modules/bootstrap/dist/js'));
 app.use('/js', express.static(__dirname + '/node_modules/jquery/dist'));
 app.use('/css', express.static(__dirname + '/node_modules/bootstrap/dist/css'));
+app.use('/fonts', express.static(__dirname + '/node_modules/bootstrap/fonts'));
 
 // routing
 app.get('/', function(req, res) {
@@ -20,17 +21,23 @@ console.log('Battleship server: v%s', config.version);
 
 // sockets.io
 io.on('connection', function(socket) {
-    console.log('user connected...');
+    console.log('connection opened [%s] ...', socket.id);
     socket.emit('server version', config.version);
 
-    socket.on('disconnect', function() {
-        console.log('user disconnected');
-    });
+    socket.on('identify', function(userName) {
+        console.log("user identified: %s [%s]", userName, socket.id);
+        io.emit('user connected', userName);
 
-    socket.on('chat message', function(msg) {
-        if (msg.trim()) {
-            io.emit('chat message', msg);
-        }
+        socket.on('disconnect', function() {
+            console.log('user `%s` disconnected', userName);
+            io.emit('user disconnected', userName);
+        });
+
+        socket.on('chat message', function(text) {
+            if (text.trim()) {
+                io.emit('chat message', { userName: userName, text: text });
+            }
+        });
     });
 });
 
