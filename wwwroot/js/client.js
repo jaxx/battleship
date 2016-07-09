@@ -30,13 +30,13 @@ $(document).ready(function() {
     
     // Adds possibility to drop ship
     $(function() {
-        $("td").droppable({
-            drop: handleDrop
+        $("#board td").droppable({
+            drop: dropShip
         });
     });
     
     // Handle how ship is dropped
-    function handleDrop(event, ui) {
+    function dropShip(event, ui) {
         ui.draggable.position({
             of: $(this),
             my: "left top",
