@@ -4,6 +4,7 @@ var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var process = require('process');
 var config = require('./config');
+var moment = require("moment");
 
 // redirects
 app.use('/', express.static(__dirname + '/wwwroot'));
@@ -37,7 +38,7 @@ io.on('connection', function(socket) {
 
         socket.on('chat message', function(text) {
             if (text.trim()) {
-                io.emit('chat message', { username: username, text: text });
+                io.emit('chat message', { username: username, text: text, time: moment().format("DD.MM.YYYY HH:mm:ss") });
             }
         });
     });

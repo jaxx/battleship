@@ -96,6 +96,7 @@ $(document).ready(function() {
             $messages.append(
                 $("<li>")
                     .addClass("list-group-item")
+                    .append($("<span>").addClass("badge").text(msg.time))
                     .append($("<h4>").addClass("list-group-item-heading").text(msg.username))
                     .append($("<p>").addClass("list-group-item-text").html(text)));
             $messages.parent().animate({ scrollTop: $messages.parent()[0].scrollHeight }, "slow");
