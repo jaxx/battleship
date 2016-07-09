@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Battleship</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/jquery-ui.min.css" rel="stylesheet">
     <link href="css/site.css" rel="stylesheet">
     <noscript>
       <style type="text/css">
@@ -175,6 +176,12 @@
               </table>
             </div>
           </div>
+
+          <div id="ship-1" class="ship"></div>
+          <div id="ship-2" class="ship"></div>
+          <div id="ship-3" class="ship"></div>
+          <div id="ship-4" class="ship"></div>
+
         </div>
         <div class="col-lg-4">
           <div class="board-container">
@@ -323,6 +330,7 @@
     </div>
     <script src="/socket.io/socket.io.js"></script>
     <script src="js/jquery.min.js"></script>
+    <script src="js/jquery-ui.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/client.js"></script>
   </body>

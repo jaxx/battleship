@@ -19,25 +19,35 @@ $(document).ready(function() {
         }
     });
 
-/*
-    var mouseIsDown = false;
-    $("#board").on("mousedown", function() {
-        mouseIsDown = true;
-        console.log("Mouse is down");
+    // Adds possibility to drag ship
+    $(function() {
+        $(".ship").draggable({
+            containment: "parent",
+            cursor: "move",
+            revert: true
+        });
     });
-
-    $("#board").on("mouseup", function() {
-        mouseIsDown = false;
-        console.log("Mouse is up");
-    })
-
-    $("board").on("mouseover", function(evt) {
-        console.log("Mouse is over.");
-        if (mouseIsDown) {
-            console.log(evt.target);
-        }
+    
+    // Adds possibility to drop ship
+    $(function() {
+        $("td").droppable({
+            drop: handleDrop
+        });
     });
-*/
+    
+    // Handle how ship is dropped
+    function handleDrop(event, ui) {
+        ui.draggable.position({
+            of: $(this),
+            my: "left top",
+            at: "left top"
+        });
+        
+        ui.draggable.draggable({
+            revert: false,
+            grid: [32, 32]
+        });
+    }
 
     // Send chat message (if anything is written in message box).
     $("form").submit(function() {
