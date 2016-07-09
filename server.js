@@ -20,6 +20,10 @@ app.get('/', function(req, res) {
 
 console.log('Battleship server: v%s', config.version);
 
+function getts() {
+    return moment().format("DD.MM.YYYY HH:mm:ss");
+}
+
 // sockets.io
 io.on('connection', function(socket) {
     console.log('connection opened [%s] ...', socket.id);
@@ -29,16 +33,16 @@ io.on('connection', function(socket) {
         socket.removeAllListeners('identify');
 
         console.log("user identified: %s [%s]", username, socket.id);
-        io.emit('user connected', username);
+        io.emit('user connected', { username: username, time: getts() });
 
         socket.on('disconnect', function() {
             console.log('user `%s` disconnected', username);
-            io.emit('user disconnected', username);
+            io.emit('user disconnected', { username: username, time: getts() });
         });
 
         socket.on('chat message', function(text) {
             if (text.trim()) {
-                io.emit('chat message', { username: username, text: text, time: moment().format("DD.MM.YYYY HH:mm:ss") });
+                io.emit('chat message', { username: username, text: text, time: getts() });
             }
         });
     });

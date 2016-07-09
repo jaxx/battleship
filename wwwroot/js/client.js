@@ -122,24 +122,26 @@ $(document).ready(function() {
     });
 
     // Handles new connecting user event.
-    socket.on("user connected", function(username) {
+    socket.on("user connected", function(msg) {
         $("#messages")
             .append($("<li>")
             .addClass("list-group-item list-group-item-success")
+            .append($("<span>").addClass("badge").text(msg.time))
             .append($("<span>").addClass("glyphicon glyphicon-log-in"))
             .append(" ")
-            .append($("<strong>").text(username))
+            .append($("<strong>").text(msg.username))
             .append(" logged on &hellip;"));
     });
 
     // Handles user leaving event.
-    socket.on("user disconnected", function(username) {
+    socket.on("user disconnected", function(msg) {
         $("#messages")
             .append($("<li>")
             .addClass("list-group-item list-group-item-danger")
+            .append($("<span>").addClass("badge").text(msg.time))
             .append($("<span>").addClass("glyphicon glyphicon-log-out"))
             .append(" ")
-            .append($("<strong>").text(username))
+            .append($("<strong>").text(msg.username))
             .append(" logged out &hellip;"));
     });
 
