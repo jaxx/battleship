@@ -19,7 +19,7 @@ Multiplayer battleship game
 
 2. Start new instance of server:
 
-       forever start --uid battleship --killSignal SIGINT --append server.js`
+       `forever start --uid battleship --killSignal SIGINT --append server.js`
 
 3. To restart or stop running instance use `forever restart battleship` or
    `forever stop battleship` respectively.
