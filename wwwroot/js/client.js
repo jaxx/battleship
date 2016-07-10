@@ -19,7 +19,7 @@ $(document).ready(function() {
         }
     });
 
-    // Adds possibility to drag ship
+    // Make ship draggable
     $(function() {
         $(".ship").draggable({
             containment: "parent",
@@ -28,12 +28,25 @@ $(document).ready(function() {
         });
     });
     
-    // Adds possibility to drop ship
+    // Make board droppable
     $(function() {
         $("#board td").droppable({
-            drop: dropShip
+            drop: dropShip,
+            over: snapToGrid,
+            out: function(event, ui) {
+                ui.draggable.draggable({
+                    grid: false
+                });
+            }
         });
     });
+
+    // Snap to grid if draggable is over droppable
+    function snapToGrid(event, ui) {
+        ui.draggable.draggable({
+            grid: [30, 30]
+        });
+    }
     
     // Handle how ship is dropped
     function dropShip(event, ui) {
@@ -44,8 +57,7 @@ $(document).ready(function() {
         });
         
         ui.draggable.draggable({
-            revert: false,
-            grid: [32, 32]
+            revert: false
         });
     }
 
