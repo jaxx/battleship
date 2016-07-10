@@ -9,3 +9,8 @@ Multiplayer battleship game
 2. Open terminal and install project dependencies: `npm install`
 3. Start server: `node server.js`
 4. Open browser and navigate to [http://localhost:3000](http://localhost:3000)
+
+## Contributors
+
+* [@janno-p](https://github.com/janno-p)
+* [@jaxx](https://github.com/jaxx)
