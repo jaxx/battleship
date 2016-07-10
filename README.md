@@ -10,6 +10,10 @@ Multiplayer battleship game
 3. Start server: `node server.js`
 4. Open browser and navigate to [http://localhost:3000](http://localhost:3000)
 
+
+## Server Setup
+
+
 ## Contributors
 
 * [@janno-p](https://github.com/janno-p)
