@@ -13,8 +13,8 @@ var jsonParser = bodyParser.json();
 var secret = fs.existsSync("SECRET") ? fs.readFileSync("SECRET", "utf8").trim() : "";
 
 var verifySignature = function(req, res, next) {
-    var hash = req.header("X-Hub-Signature");
-    var hmac = crypto.createHmac("sha1", secret);
+    var hash = req.header("X-Hub-Signature").trim().split("=");
+    var hmac = crypto.createHmac(hash[0], secret);
 
     req.on("data", function(data) {
         hmac.update(data);
@@ -22,7 +22,7 @@ var verifySignature = function(req, res, next) {
 
     req.on("end", function() {
         var crypted = hmac.digest("hex");
-        if (crypted === hash) {
+        if (crypted === hash[1]) {
             return next();
         } else {
             return res.send("Invalid hash", { "Content-Type": "text/plain" }, 403);
