@@ -31,13 +31,8 @@ $(document).ready(function() {
     // Make board droppable
     $(function() {
         $("#board td").droppable({
-            drop: dropShip,
-            over: snapToGrid,
-            out: function(event, ui) {
-                ui.draggable.draggable({
-                    grid: false
-                });
-            }
+            tolerance: "pointer",
+            drop: dropShip
         });
     });
 
@@ -50,10 +45,14 @@ $(document).ready(function() {
     
     // Handle how ship is dropped
     function dropShip(event, ui) {
+        var dragItemOffsetX = event.offsetX;
+        var draggableCell = Math.floor(dragItemOffsetX / 30);
+        var toLeft = draggableCell * 30;
+
         ui.draggable.position({
             of: $(this),
             my: "left top",
-            at: "left top"
+            at: "left-" + toLeft + " top"
         });
         
         ui.draggable.draggable({
