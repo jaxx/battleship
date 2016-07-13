@@ -22,7 +22,7 @@ $(document).ready(function() {
     // Make ship draggable
     $(function() {
         $(".ship").draggable({
-            containment: "parent",
+            containment: "document",
             cursor: "move",
             revert: true
         });

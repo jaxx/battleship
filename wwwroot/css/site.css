@@ -9,12 +9,12 @@ td {
 
 .board-container {
     display: inline-block;
-    padding: 10px;
 }
 
 .ship {
     height: 30px;
     background-color: black;
+    margin: 5px;
 }
 
 #ship-1 {
@@ -31,4 +31,8 @@ td {
 
 #ship-4 {
     width: 120px;
+}
+
+#available-ships {
+    margin-top: 40px;
 }
