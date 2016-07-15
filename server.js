@@ -50,7 +50,7 @@ io.on("connection", function(socket) {
 
 // start server
 http.listen(3000, function() {
-    console.log('Listening on *:3000...');
+    console.log("Listening on *:3000...");
 });
 
 process.on("SIGINT", function() {

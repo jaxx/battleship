@@ -4,18 +4,17 @@ var bodyParser = require("body-parser");
 var crypto = require("crypto");
 var fs = require("fs");
 var process = require("child_process");
-var path = require("path");
 var git = require("nodegit");
 
 var app = express();
 var server = http.Server(app);
 var secret = fs.existsSync("SECRET") ? fs.readFileSync("SECRET", "utf8").trim() : "";
 
-var verifySignature = function(req, res, buf, enc) {
+var verifySignature = function(req, res, buf) {
     var hash = req.header("X-Hub-Signature").trim().split("=");
     var crypted = crypto.createHmac(hash[0], secret).update(buf).digest("hex");
     if (crypted !== hash[1]) throw new Error("Invalid hash");
-}
+};
 
 var jsonParser = bodyParser.json({ verify: verifySignature });
 

@@ -1,3 +1,5 @@
+/* global $, io */
+
 $(document).ready(function() {
     var socket = io();
 
@@ -27,7 +29,7 @@ $(document).ready(function() {
             revert: true
         });
     });
-    
+
     // Make board droppable
     $(function() {
         $("#board td").droppable({
@@ -37,12 +39,14 @@ $(document).ready(function() {
     });
 
     // Snap to grid if draggable is over droppable
+    /*
     function snapToGrid(event, ui) {
         ui.draggable.draggable({
             grid: [30, 30]
         });
     }
-    
+    */
+
     // Handle how ship is dropped
     function dropShip(event, ui) {
         var dragItemOffsetX = event.offsetX;
@@ -54,7 +58,7 @@ $(document).ready(function() {
             my: "left top",
             at: "left-" + toLeft + " top"
         });
-        
+
         ui.draggable.draggable({
             revert: false
         });
@@ -100,18 +104,18 @@ $(document).ready(function() {
         return this.replace(/\(\w+\)/g, function(m) {
             var img = emoticonMap[m];
             if (img) {
-                return '<img alt="' + m + '" src="https://az705183.vo.msecnd.net/onlinesupportmedia/onlinesupport/media/skype/screenshots/fa12330/emoticons/' + img + '_80_anim_gif.gif" />';
+                return "<img alt=\"" + m + "\" src=\"https://az705183.vo.msecnd.net/onlinesupportmedia/onlinesupport/media/skype/screenshots/fa12330/emoticons/" + img + "_80_anim_gif.gif\" />";
             }
             return m;
         });
-    }
+    };
 
     // Handles incoming chat message.
     socket.on("chat message", function(msg) {
         var text = msg.text;
         if ($.trim(text)) {
             text = escapeHtml(text).replace(/(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/g, function(m) {
-                return '<a href="' + m + '" target="_blank">' + m + '</a>';
+                return "<a href=\"" + m + "\" target=\"_blank\">" + m + "</a>";
             }).populateEmoticons();
             var $messages = $("#messages");
             $messages.append(
@@ -136,7 +140,7 @@ $(document).ready(function() {
         var currentVersion = $("body").attr("data-battleship-version");
         if (!currentVersion) {
             $("body").attr("data-battleship-version", version);
-        } else if (currentVersion != version) {
+        } else if (currentVersion !== version) {
             $("#server-version").text(version);
             $(".upgrade-alert").show("slow");
         }

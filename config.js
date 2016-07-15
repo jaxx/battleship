@@ -8,7 +8,7 @@ function getVersion() {
         return fs.readFileSync(file, "utf8").trim();
     }
 
-    fs.writeFileSync(file, defaultVersion, 'utf8');
+    fs.writeFileSync(file, defaultVersion, "utf8");
     return defaultVersion;
 }
 
