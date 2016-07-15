@@ -1,3 +1,5 @@
+/* global require */
+
 var fs = require("fs");
 
 function getVersion() {

@@ -15,6 +15,7 @@ $(document).ready(function() {
         if ($.trim(username)) {
             $("#usernameModal").modal("hide");
             socket.emit("identify", username);
+            $("body").attr("data-username", username);
         } else {
             $("#username").wrap("<div class='has-error'>");
             $("#username").focus();
@@ -156,6 +157,7 @@ $(document).ready(function() {
             .append(" ")
             .append($("<strong>").text(msg.username))
             .append(" logged on &hellip;"));
+        socket.emit("list users");
     });
 
     // Handles user leaving event.
@@ -168,6 +170,14 @@ $(document).ready(function() {
             .append(" ")
             .append($("<strong>").text(msg.username))
             .append(" logged out &hellip;"));
+        socket.emit("list users");
+    });
+
+    // Handles list of identified users.
+    socket.on("users", function(users) {
+        $("#users")
+            .empty()
+            .append($.map(users, function(user) { return $("<li>").text(user); }));
     });
 
     // Open login dialog after page is loaded.
