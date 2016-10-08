@@ -6,18 +6,6 @@ var process = require("process");
 var config = require("./config");
 var moment = require("moment");
 
-// redirects
-app.use("/", express.static(__dirname + "/wwwroot"));
-app.use("/js", express.static(__dirname + "/node_modules/bootstrap/dist/js"));
-app.use("/js", express.static(__dirname + "/node_modules/jquery/dist"));
-app.use("/css", express.static(__dirname + "/node_modules/bootstrap/dist/css"));
-app.use("/fonts", express.static(__dirname + "/node_modules/bootstrap/fonts"));
-
-// routing
-app.get("/", function(req, res) {
-    res.sendFile("index.html");
-});
-
 console.log("Battleship server: v%s", config.version);
 
 function getts() {

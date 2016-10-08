@@ -1,6 +1,6 @@
 /* global $, io */
 
-$(document).ready(function() {
+$(function() {
     var socket = io();
 
     // Reloads entire page when user clicks on refresh button.
@@ -181,12 +181,10 @@ $(document).ready(function() {
     });
 
     // Open login dialog after page is loaded.
-    $(window).on("load", function() {
-        $("#usernameModal").modal({
-            backdrop: "static",
-            keyboard: false
-        });
-    }).load();
+    $("#usernameModal").modal({
+        backdrop: "static",
+        keyboard: false
+    });
 
     // Resize chat area when window size changes (needs improvement).
     $(window).on("resize", function() {

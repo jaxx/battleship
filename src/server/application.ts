@@ -12,6 +12,8 @@ export class Application {
         this.app = express();
         this.server = http.createServer(this.app);
         this.io = io(this.server);
+
+        this.routes();
     }
 
     public run() {
@@ -23,5 +25,20 @@ export class Application {
             this.io.emit("server closed");
             process.exit(0);
         });
+    }
+
+    private routes() {
+        this.app.use("/", this.static("wwwroot"));
+        this.app.use("/js", this.static("node_modules/bootstrap/dist/js"));
+        this.app.use("/js", this.static("node_modules/jquery/dist"));
+        this.app.use("/js", this.static("node_modules/jquery-ui-dist"));
+        this.app.use("/css", this.static("node_modules/bootstrap/dist/css"));
+        this.app.use("/css", this.static("node_modules/jquery-ui-dist"));
+        this.app.use("/fonts", this.static("node_modules/bootstrap/fonts"));
+        this.app.get("/", (req, res) => res.sendFile("index.html"));
+    }
+
+    private static(path: string) {
+        return express.static(__dirname + "/../../" + path);
     }
 }
