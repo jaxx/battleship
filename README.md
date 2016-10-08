@@ -6,6 +6,10 @@ Multiplayer battleship game
 ## Installation
 
 1. Install [node.js and npm](https://nodejs.org/en/download/package-manager/)
+2. Install [TypeScript](http://www.typescriptlang.org):
+
+       npm install -g typescript
+
 2. Open terminal and install project dependencies: `npm install`
 3. Start server with command `node server.js` or if you want to run server on background read Server Setup section
 4. Open browser and navigate to [http://localhost:3000](http://localhost:3000)
