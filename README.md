@@ -8,7 +8,7 @@ Multiplayer battleship game
 1. Install [node.js and npm](https://nodejs.org/en/download/package-manager/)
 2. Use `npm` to install required global dependencies:
 
-       npm install -g gulp-cli
+       npm install -g gulp-cli typings
 
 2. Open terminal and install project dependencies: `npm install`
 3. Start server with command `node server.js` or if you want to run server on background read Server Setup section
