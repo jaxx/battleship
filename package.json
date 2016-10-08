@@ -14,5 +14,8 @@
     "source-map-loader": "^0.1.5",
     "typescript": "^2.0.3",
     "webpack": "^1.13.2"
+  },
+  "scripts": {
+    "start": "gulp && node ./dist/battleship.js"
   }
 }
