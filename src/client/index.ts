@@ -187,8 +187,9 @@ $(() => {
     });
 
     // Resize chat area when window size changes (needs improvement).
-    $(window).on("resize", () => {
-        $("#chat-container").height($(this).height() - 100);
-        $("#chat-container").css("max-height", $(this).height() - 100);
+    var $window = $(window);
+    $window.on("resize", () => {
+        $("#chat-container").height($window.height() - 100);
+        $("#chat-container").css("max-height", $window.height() - 100);
     }).resize();
 });
