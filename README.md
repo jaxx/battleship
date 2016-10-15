@@ -8,8 +8,8 @@ Multiplayer battleship game
 1. Install [node.js and npm](https://nodejs.org/en/download/package-manager/)
 2. Open terminal and install project dependencies:
 
-        npm install -g gulp-cli
-        npm install
+        npm install -g yarn gulp-cli
+        yarn install
 
 3. Start server with command `npm start` or if you want to run server on background read Server Setup section
 4. Open browser and navigate to [http://localhost:3000](http://localhost:3000)
@@ -19,11 +19,11 @@ Multiplayer battleship game
 
 1. Install `forever` task manager to run server on background (must be installed globally):
 
-       `npm install -g forever`
+        npm install -g forever
 
 2. Start new instance of server:
 
-       `forever start --uid battleship --killSignal SIGINT --append server.js`
+        forever start --uid battleship --killSignal SIGINT --append ./dist/battleship.js
 
 3. To restart or stop running instance use `forever restart battleship` or
    `forever stop battleship` respectively.
