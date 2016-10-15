@@ -11,7 +11,7 @@ Multiplayer battleship game
         npm install -g yarn gulp-cli
         yarn install
 
-3. Start server with command `npm start` or if you want to run server on background read Server Setup section
+3. Start server with command `yarn run start` or if you want to run server on background read Server Setup section
 4. Open browser and navigate to [http://localhost:3000](http://localhost:3000)
 
 
