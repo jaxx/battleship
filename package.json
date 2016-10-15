@@ -1,7 +1,16 @@
 {
   "name": "battleship",
   "version": "0.0.1",
+  "contributors": [
+    "Janno Põldma <janno.poldma@gmail.com>",
+    "Jakko Sikkar <jakko.sikkar@gmail.com>"
+  ],
   "description": "Multiplayer battleship game",
+  "private": true,
+  "repository": {
+    "url": "git@github.com:jaxx/battleship.git",
+    "type": "git"
+  },
   "dependencies": {
     "@types/bootstrap": "^3.3.32",
     "@types/jquery": "^2.0.33",
