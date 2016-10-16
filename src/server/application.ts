@@ -17,19 +17,21 @@ export class Application {
     private app: express.Application;
     private server: http.Server;
     private io: SocketIO.Server;
+    private version: string;
 
     private users: { [id: string]: User; } = {};
 
-    constructor() {
+    constructor(version: string) {
         this.app = express();
         this.server = http.createServer(this.app);
         this.io = io(this.server);
+        this.version = version;
 
         this.config();
         this.routes();
         this.handler();
 
-        console.log("Battleship server: v%s", "0.0.1");
+        console.log("Battleship server: v%s", this.version);
     }
 
     public run() {
@@ -61,7 +63,7 @@ export class Application {
     private handler() {
         this.io.on("connection", (socket) => {
             console.log("connection opened [%s] ...", socket.id);
-            socket.emit("server version", "0.0.1");
+            socket.emit("server version", this.version);
 
             socket.on("identify", (username: string) => {
                 socket.removeAllListeners("identify");

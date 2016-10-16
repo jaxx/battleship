@@ -137,6 +137,7 @@ $(() => {
 
     // Handles server version change.
     socket.on("server version", (version: string) => {
+        document.title = `Battleship v${version}`;
         $(".server-closed-alert").hide("slow");
         var currentVersion = $("body").attr("data-battleship-version");
         if (!currentVersion) {

@@ -1,4 +1,7 @@
 import * as application from "./server/application";
+import { getVersion } from "./server/version";
 
-let app = new application.Application();
-app.run();
+getVersion(version => {
+    let app = new application.Application(version);
+    app.run();
+});
