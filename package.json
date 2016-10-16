@@ -12,17 +12,25 @@
     "type": "git"
   },
   "scripts": {
-    "start": "gulp && node ./dist/battleship.js"
+    "battleship": "gulp && node ./dist/battleship.js",
+    "start-server": "gulp && forever start --uid battleship --killSignal SIGINT --append ./dist/battleship.js",
+    "stop-server": "forever stop battleship",
+    "upgrade": "gulp && node ./dist/upgrade.js",
+    "start-upgrade-server": "gulp && forever start --uid battleship-upgrade --killSignal SIGINT --append ./dist/upgrade.js",
+    "stop-upgrade-server": "forever stop battleship-upgrade"
   },
   "dependencies": {
+    "body-parser": "^1.15.2",
     "bootstrap": "^3.3.7",
     "express": "^4.14.0",
     "jquery": "^3.1.1",
     "jquery-ui-dist": "^1.12.1",
     "moment": "^2.15.1",
+    "simple-git": "^1.54.0",
     "socket.io": "^1.5.0"
   },
   "devDependencies": {
+    "@types/body-parser": "^0.0.33",
     "@types/bootstrap": "^3.3.32",
     "@types/express": "^4.0.33",
     "@types/jquery": "^2.0.33",

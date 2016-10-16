@@ -11,7 +11,7 @@ Multiplayer battleship game
         npm install -g yarn gulp-cli
         yarn install
 
-3. Start server with command `yarn run start` or if you want to run server on background read Server Setup section
+3. Start server with command `yarn run battleship` or if you want to run server on background read Server Setup section
 4. Open browser and navigate to [http://localhost:3000](http://localhost:3000)
 
 
@@ -23,10 +23,12 @@ Multiplayer battleship game
 
 2. Start new instance of server:
 
-        forever start --uid battleship --killSignal SIGINT --append ./dist/battleship.js
+        yarn run start-server
 
-3. To restart or stop running instance use `forever restart battleship` or
-   `forever stop battleship` respectively.
+3. To stop running instance execute:
+
+        yarn run stop-server
+
 
 ### Automatic restart on Github commit
 
@@ -38,16 +40,18 @@ restart application server.
 
 2. Start new instance of upgrade server:
 
-       forever start --uid github-listener --append upgrade.js
+        yarn run start-upgrade-server
 
 3. Register new Webhook for the Github repository using same secret key specified in `SECRET`
-   file and url to the application `http://host:3001/notify`.
+   file and url to the application `http://<host>:3001/notify`.
 
 4. Check that `Recent Deliveries` section displays successful test message result.
 
 5. Web server is now ready to listen push events on master branch and upgrading application
    server to latest version automatically. You can stop automatic updates by issuing following
-   command: `forever stop github-listener`.
+   command:
+
+        yarn run stop-upgrade-server
 
 
 ## Contributors
