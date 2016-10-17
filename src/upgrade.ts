@@ -30,11 +30,11 @@ app.post("/notify", jsonParser, (req, res) => {
     res.sendStatus(200);
 
     simpleGit
-        .then(() => childProcess.spawnSync("yarn", ["run", "stop-server"], { encoding: "utf8", shell: true }))
+        .then(() => childProcess.spawnSync("npm", ["run", "stop-server"], { encoding: "utf8", shell: true }))
         .pull()
         .then(() => {
             childProcess.spawnSync("webpack");
-            childProcess.spawnSync("yarn", ["run", "start-server"], { encoding: "utf8", shell: true })
+            childProcess.spawnSync("npm", ["run", "start-server"], { encoding: "utf8", shell: true })
         });
 });
 
