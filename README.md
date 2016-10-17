@@ -1,6 +1,6 @@
 # Battleship
 
-Multiplayer battleship game.
+Multiplayer battleship game
 
 
 ## Installation
