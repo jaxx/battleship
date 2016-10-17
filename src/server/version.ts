@@ -9,7 +9,7 @@ var git = require("simple-git");
 var repository: GitRepository = git(path.join(__dirname, ".."));
 
 export function getVersion(callback: (version: string) => void) {
-    repository.show(["-s", "--format=%ct-%h", "HEAD"], (err, value) => {
+    repository.show(["-s", "--format=%ct-%h"], (err, value) => {
         callback("0.0.1-" + value.trim());
     });
 }
