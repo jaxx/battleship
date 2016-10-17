@@ -1,5 +1,7 @@
-module.exports = {
-    entry: "./dist/client/index",
+var nodeExternals = require("webpack-node-externals");
+
+var clientConfig = {
+    entry: "./src/client/index",
 
     output: {
         filename: "./wwwroot/js/bundle.js"
@@ -8,12 +10,12 @@ module.exports = {
     devtool: "source-map",
 
     resolve: {
-        extensions: ["", ".js"]
+        extensions: ["", ".ts", ".tsx", ".js", ".jsx"]
     },
 
     module: {
         loaders: [
-            { test: /\.js$/, loader: "babel-loader?presets[]=es2015" }
+            { test: /\.tsx?$/, loader: "babel-loader?presets[]=es2015!awesome-typescript-loader" }
         ],
         preLoaders: [
             { test: /\.js$/, loader: "source-map-loader" }
@@ -27,3 +29,37 @@ module.exports = {
         "socket.io-client": "io"
     }
 };
+
+var serverConfig = {
+    entry: {
+        "battleship": "./src/battleship",
+        "upgrade": "./src/upgrade"
+    },
+
+    output: {
+        path: "./dist/",
+        filename: "[name].js"
+    },
+
+    target: "node",
+
+    node: {
+        __dirname: false
+    },
+
+    resolve: {
+        extensions: ["", ".ts", ".tsx", ".js", ".jsx"]
+    },
+
+    module: {
+        loaders: [
+            { test: /\.tsx?$/, loader: "awesome-typescript-loader" }
+        ]
+    },
+
+    externals: [
+        nodeExternals()
+    ]
+};
+
+module.exports = [clientConfig, serverConfig];

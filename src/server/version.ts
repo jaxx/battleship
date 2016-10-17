@@ -6,7 +6,7 @@ interface GitRepository {
 
 var git = require("simple-git");
 
-var repository: GitRepository = git(path.join(__dirname, "..", ".."));
+var repository: GitRepository = git(path.join(__dirname, ".."));
 
 export function getVersion(callback: (version: string) => void) {
     repository.show(["-s", "--format=%ct-%h", "HEAD"], (err, value) => {

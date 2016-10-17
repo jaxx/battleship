@@ -8,8 +8,13 @@ Multiplayer battleship game
 1. Install [node.js and npm](https://nodejs.org/en/download/package-manager/)
 2. Open terminal and install project dependencies:
 
-        npm install -g yarn gulp-cli
+        npm install -g yarn webpack
         yarn install
+
+3. Compile TypeScript files to JavaScript use command `webpack`. For development
+it's more convenient to keep watching input files for changes and compile them automatically:
+
+        webpack --progress --colors --watch
 
 3. Start server with command `yarn run battleship` or if you want to run server on background read Server Setup section
 4. Open browser and navigate to [http://localhost:3000](http://localhost:3000)

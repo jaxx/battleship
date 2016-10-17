@@ -93,6 +93,6 @@ export class Application {
     }
 
     private static(path: string) {
-        return express.static(__dirname + "/../../" + path);
+        return express.static(__dirname + "/../" + path);
     }
 }
