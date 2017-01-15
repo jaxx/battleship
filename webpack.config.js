@@ -15,6 +15,7 @@ var clientConfig = {
 
     module: {
         loaders: [
+            { test: /\.html$/, loader: "html" },
             { test: /\.tsx?$/, loader: "babel-loader?presets[]=es2015!awesome-typescript-loader" }
         ],
         preLoaders: [

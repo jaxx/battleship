@@ -2,12 +2,17 @@ import Vue = require("vue");
 import Component from "vue-class-component";
 
 @Component({
-    template: `<button @click="onClick">Click!</button>`
+    template: require("./chat.html"),
+    props: {
+        message: String
+    }
 })
 export default class ChatComponent extends Vue {
-    message: string = "Hello!";
+    message: string;
+
+    msg: string = this.message || "Hello!";
 
     onClick (): void {
-        window.alert(this.message);
+        window.alert(this.msg);
     }
 }
