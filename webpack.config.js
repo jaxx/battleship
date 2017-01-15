@@ -26,7 +26,9 @@ var clientConfig = {
         "jquery": "jQuery",
         "react": "React",
         "react-dom": "ReactDOM",
-        "socket.io-client": "io"
+        "socket.io-client": "io",
+        "vue": "Vue",
+        "vue-class-component": "VueClassComponent"
     }
 };
 

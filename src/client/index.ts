@@ -2,6 +2,11 @@ import * as $ from "jquery";
 import * as io from "socket.io-client";
 import * as msg from "../common/messages";
 
+import Vue = require('vue');
+import ChatComponent from "./components/chat";
+
+Vue.component("chat", ChatComponent);
+
 declare global {
     interface String {
         populateEmoticons(): string;
@@ -193,4 +198,8 @@ $(() => {
         $("#chat-container").height($window.height() - 100);
         $("#chat-container").css("max-height", $window.height() - 100);
     }).resize();
+});
+
+new Vue({
+    el: "#app"
 });
