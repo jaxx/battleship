@@ -73,19 +73,6 @@ $(() => {
         $(".server-closed-alert").show("slow");
     });
 
-    // Handles server version change.
-    socket.on("server version", (version: string) => {
-        document.title = `Battleship v${version}`;
-        $(".server-closed-alert").hide("slow");
-        var currentVersion = $("body").attr("data-battleship-version");
-        if (!currentVersion) {
-            $("body").attr("data-battleship-version", version);
-        } else if (currentVersion !== version) {
-            $("#server-version").text(version);
-            $(".upgrade-alert").show("slow");
-        }
-    });
-
     // Handles list of identified users.
     socket.on("users", (users: string []) => {
         $("#users")
@@ -101,5 +88,10 @@ $(() => {
 });
 
 new Vue({
-    el: "#app"
+    el: "#app",
+    methods: {
+        updateTitle(version) {
+            document.title = `Battleship v${version}`;
+        }
+    }
 })
