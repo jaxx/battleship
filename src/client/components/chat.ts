@@ -1,18 +1,21 @@
 import Vue = require("vue");
 import Component from "vue-class-component";
+import { Message} from "../clientmessages";
 
 @Component({
     template: require("./chat.html"),
     props: {
-        message: String
+        conversation: Array
     }
 })
 export default class ChatComponent extends Vue {
-    message: string;
+    message: string = "";
 
-    msg: string = this.message || "Hello!";
+    conversation: Message[];
 
-    onClick (): void {
-        window.alert(this.msg);
+    sendMessage (): void {
+        const msg = $.trim(this.message);
+        this.message = "";
+        if (msg) this.$emit("send-message", msg);
     }
 }

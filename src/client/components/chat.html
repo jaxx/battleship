@@ -1,1 +1,34 @@
-<button @click="onClick">Click!</button>
+<div class="chat">
+    <div class="chat__messages">
+        <ul id="messages" class="list-group">
+            <template v-for="msg in conversation">
+                <li v-if="msg.kind === 'chat'">
+                    <h1>Chat</h1>
+                </li>
+                <li v-else-if="msg.kind === 'connect'" class="list-group-item list-group-item-success">
+                    <span class="badge">{{ msg.message.time }}</span>
+                    <span class="glyphicon glyphicon-log-in"></span>
+                    <strong>{{ msg.message.username }}</strong>
+                    <span> logged on &hellip;</span>
+                </li>
+                <li v-else-if="msg.kind === 'disconnect'" class="list-group-item list-group-item-danger">
+                    <span class="badge">{{ msg.message.time }}</span>
+                    <span class="glyphicon glyphicon-log-out"></span>
+                    <strong>{{ msg.message.username }}</strong>
+                    <span> logged out &hellip;</span>
+                </li>
+                <li v-else>
+                    <h1>Unknown</h1>
+                </li>
+            </template>
+        </ul>
+    </div>
+    <form class="chat__actions" @submit.prevent="sendMessage()">
+        <div class="input-group">
+            <input type="text" class="form-control" autocomplete="off" v-model="message" />
+            <span class="input-group-btn">
+                <button class="btn btn-default" type="submit">Send</button>
+            </span>
+        </div>
+    </form>
+</div>

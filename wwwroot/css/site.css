@@ -36,3 +36,16 @@ td {
 #available-ships {
     margin-top: 40px;
 }
+
+.chat {
+    height: calc(100vh - 40px);
+}
+
+.chat__messages {
+    height: calc(100vh - 74px);
+    overflow-x: hidden;
+}
+
+.chat__actions {
+    height: 34px;
+}

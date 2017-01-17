@@ -3,9 +3,12 @@ import * as io from "socket.io-client";
 import * as msg from "../common/messages";
 
 import Vue = require('vue');
+
 import ChatComponent from "./components/chat";
+import AppComponent from "./components/app";
 
 Vue.component("chat", ChatComponent);
+Vue.component("app", AppComponent);
 
 declare global {
     interface String {
@@ -97,16 +100,6 @@ $(() => {
         drop: dropShip
     });
 
-    // Send chat message (if anything is written in message box).
-    $("form").submit(() => {
-        let msg = $("#m").val();
-        if ($.trim(msg)) {
-            socket.emit("chat message", msg);
-            $("#m").val("");
-        }
-        return false;
-    });
-
     // Special characters that need escaping in user input.
     let entityMap: { [id: string]: string; } = { "&": "&amp;", "<": "&lt;", ">": "&gt;", "\"": "&quot;", "'": "&#39;" };
 
@@ -115,24 +108,6 @@ $(() => {
             return entityMap[s];
         });
     }
-
-    // Handles incoming chat message.
-    socket.on("chat message", (m: msg.UserMessage & msg.ChatMessage) => {
-        let text = m.text;
-        if ($.trim(text)) {
-            text = escapeHtml(text).replace(/(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/g, m => {
-                return "<a href=\"" + m + "\" target=\"_blank\">" + m + "</a>";
-            }).populateEmoticons();
-            let $messages = $("#messages");
-            $messages.append(
-                $("<li>")
-                    .addClass("list-group-item")
-                    .append($("<span>").addClass("badge").text(m.time))
-                    .append($("<h4>").addClass("list-group-item-heading").text(m.username))
-                    .append($("<p>").addClass("list-group-item-text").html(text)));
-            $messages.parent().animate({ scrollTop: $messages.parent()[0].scrollHeight }, "slow");
-        }
-    });
 
     // Handles server closing event.
     socket.on("server closed", () => {
@@ -153,32 +128,6 @@ $(() => {
         }
     });
 
-    // Handles new connecting user event.
-    socket.on("user connected", (m: msg.UserMessage) => {
-        $("#messages")
-            .append($("<li>")
-            .addClass("list-group-item list-group-item-success")
-            .append($("<span>").addClass("badge").text(m.time))
-            .append($("<span>").addClass("glyphicon glyphicon-log-in"))
-            .append(" ")
-            .append($("<strong>").text(m.username))
-            .append(" logged on &hellip;"));
-        socket.emit("list users");
-    });
-
-    // Handles user leaving event.
-    socket.on("user disconnected", (m: msg.UserMessage) => {
-        $("#messages")
-            .append($("<li>")
-            .addClass("list-group-item list-group-item-danger")
-            .append($("<span>").addClass("badge").text(m.time))
-            .append($("<span>").addClass("glyphicon glyphicon-log-out"))
-            .append(" ")
-            .append($("<strong>").text(m.username))
-            .append(" logged out &hellip;"));
-        socket.emit("list users");
-    });
-
     // Handles list of identified users.
     socket.on("users", (users: string []) => {
         $("#users")
@@ -191,15 +140,8 @@ $(() => {
         backdrop: "static",
         keyboard: false
     });
-
-    // Resize chat area when window size changes (needs improvement).
-    var $window = $(window);
-    $window.on("resize", () => {
-        $("#chat-container").height($window.height() - 100);
-        $("#chat-container").css("max-height", $window.height() - 100);
-    }).resize();
 });
 
 new Vue({
     el: "#app"
-});
+})

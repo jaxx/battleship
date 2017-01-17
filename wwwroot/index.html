@@ -19,8 +19,9 @@
   </head>
   <body>
     <div id="app">
-      <chat message="Test"></chat>
+      <app></app>
     </div>
+    <!--
     <div class="upgrade-alert alert alert-success alert-dismissible" style="display: none;">
       <button type="button" class="close" data-dismiss="alert">&times</button>
       <strong>Server Upgrade.</strong>
@@ -318,21 +319,11 @@
           </div>
         </div>
         <div class="col-lg-4">
-          <div id="chat-container" style="height: auto; max-height: 180px; overflow-x: hidden;">
-            <ul id="messages" class="list-group">
-            </ul>
-          </div>
-          <form action="">
-            <div class="input-group">
-              <input id="m" type="text" class="form-control" autocomplete="off" />
-              <span class="input-group-btn">
-                <button class="btn btn-default" type="submit">Send</button>
-              </span>
-            </div>
-          </form>
+          <chat></chat>
         </div>
       </div>
     </div>
+    -->
     <script src="/socket.io/socket.io.js"></script>
     <script src="js/jquery.min.js"></script>
     <script src="js/jquery-ui.min.js"></script>
