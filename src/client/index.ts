@@ -10,39 +10,6 @@ import AppComponent from "./components/app";
 Vue.component("chat", ChatComponent);
 Vue.component("app", AppComponent);
 
-declare global {
-    interface String {
-        populateEmoticons(): string;
-    }
-}
-
-// Emoticon mappings:
-let emoticonMap: { [id: string]: string; } = {
-    "(clap)": "clapping",
-    "(doh)": "doh",
-    "(drunk)": "drunk",
-    "(facepalm)": "facepalm",
-    "(highfive)": "highfive",
-    "(monkey)": "monkey",
-    "(nerd)": "nerd",
-    "(party)": "party",
-    "(rofl)": "rofl",
-    "(smirk)": "smirk",
-    "(wait)": "wait",
-    "(wave)": "hi",
-    "(yawn)": "yawning"
-};
-
-String.prototype.populateEmoticons = function(this: string) {
-    return this.replace(/\(\w+\)/g, m => {
-        var img = emoticonMap[m];
-        if (img) {
-            return "<img alt=\"" + m + "\" src=\"https://az705183.vo.msecnd.net/onlinesupportmedia/onlinesupport/media/skype/screenshots/fa12330/emoticons/" + img + "_80_anim_gif.gif\" />";
-        }
-        return m;
-    });
-}
-
 $(() => {
     let socket = io();
 
@@ -99,15 +66,6 @@ $(() => {
         tolerance: "pointer",
         drop: dropShip
     });
-
-    // Special characters that need escaping in user input.
-    let entityMap: { [id: string]: string; } = { "&": "&amp;", "<": "&lt;", ">": "&gt;", "\"": "&quot;", "'": "&#39;" };
-
-    function escapeHtml(html: string) {
-        return String(html).replace(/[&<>"']/g, function (s) {
-            return entityMap[s];
-        });
-    }
 
     // Handles server closing event.
     socket.on("server closed", () => {

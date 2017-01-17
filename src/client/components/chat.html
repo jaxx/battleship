@@ -1,9 +1,11 @@
 <div class="chat">
     <div class="chat__messages">
-        <ul id="messages" class="list-group">
+        <ul class="list-group">
             <template v-for="msg in conversation">
-                <li v-if="msg.kind === 'chat'">
-                    <h1>Chat</h1>
+                <li v-if="msg.kind === 'chat'" class="list-group-item">
+                    <span class="badge">{{ msg.message.time }}</span>
+                    <h4 class="list-group-item-heading">{{ msg.message.username }}</h4>
+                    <p class="list-group-item-text">{{ msg.message.text | escapeHtml | activateLinks | emoticons }}</p>
                 </li>
                 <li v-else-if="msg.kind === 'connect'" class="list-group-item list-group-item-success">
                     <span class="badge">{{ msg.message.time }}</span>
