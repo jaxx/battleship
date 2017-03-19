@@ -2,13 +2,13 @@ import * as $ from "jquery";
 import * as io from "socket.io-client";
 import * as msg from "../common/messages";
 
-import Vue = require('vue');
+import Vue = require("vue");
 
-import ChatComponent from "./components/chat";
-import AppComponent from "./components/app";
+import Chat = require("./components/chat.vue");
+import App = require("./components/app.vue");
 
-Vue.component("chat", ChatComponent);
-Vue.component("app", AppComponent);
+Vue.component("chat", Chat);
+Vue.component("app", App);
 
 $(() => {
     let socket = io();

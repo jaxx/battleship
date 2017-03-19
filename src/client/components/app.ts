@@ -1,22 +1,11 @@
 import Vue = require("vue");
-import Component from "vue-class-component";
+import { Component, Watch } from "vue-property-decorator";
+
 import * as CommonMessages from "../../common/messages";
 import * as ClientMessages from "../clientmessages";
 
-@Component({
-    template: require("./app.html"),
-    watch: {
-        isConnected(value) {
-            if (value) $(".server-closed-alert").hide("slow");
-        },
-        version(value, oldValue) {
-            if (oldValue) {
-                $(".upgrade-alert").show("slow");
-            }
-        }
-    }
-})
-export default class AppComponent extends Vue {
+@Component
+export default class App extends Vue {
     socket = io();
     conversation: ClientMessages.Message[] = [];
     version: string = "";
@@ -48,5 +37,19 @@ export default class AppComponent extends Vue {
             this.version = version;
             this.$emit("server-version", version);
         });
+    }
+
+    @Watch("isConnected")
+    isConnectedChanged(value: boolean) {
+        if (value) {
+            $(".server-closed-alert").hide("slow");
+        }
+    }
+    
+    @Watch("version")
+    versionChanged(value: string, oldValue: string) {
+        if (!!oldValue) {
+            $(".upgrade-alert").show("slow");
+        }
     }
 }

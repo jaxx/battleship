@@ -1,4 +1,5 @@
 var nodeExternals = require("webpack-node-externals");
+var path = require("path");
 
 var clientConfig = {
     entry: "./src/client/index",
@@ -10,23 +11,35 @@ var clientConfig = {
     devtool: "source-map",
 
     resolve: {
-        extensions: ["", ".ts", ".tsx", ".js", ".jsx"]
+        extensions: [".ts", ".js"]
     },
 
     module: {
-        loaders: [
-            { test: /\.html$/, loader: "html" },
-            { test: /\.tsx?$/, loader: "babel-loader?presets[]=es2015!awesome-typescript-loader" }
-        ],
-        preLoaders: [
-            { test: /\.js$/, loader: "source-map-loader" }
+        rules: [
+            {
+                test: /\.ts$/,
+                exclude: "/node_modules|vue\/src/",
+                use: {
+                    loader: "ts-loader",
+                    options: {
+                        appendTsSuffixTo: [/\.vue$/]
+                    }
+                }
+            },
+            {
+                test: /\.js$/,
+                loader: "source-map-loader",
+                enforce: "pre"
+            },
+            {
+                test: /\.vue$/,
+                loader: "vue-loader"
+            }
         ]
     },
 
     externals: {
         "jquery": "jQuery",
-        "react": "React",
-        "react-dom": "ReactDOM",
         "socket.io-client": "io",
         "vue": "Vue",
         "vue-class-component": "VueClassComponent"
@@ -40,7 +53,7 @@ var serverConfig = {
     },
 
     output: {
-        path: "./dist/",
+        path: path.resolve("./dist/"),
         filename: "[name].js"
     },
 
@@ -51,12 +64,15 @@ var serverConfig = {
     },
 
     resolve: {
-        extensions: ["", ".ts", ".tsx", ".js", ".jsx"]
+        extensions: [".ts", ".js"]
     },
 
     module: {
-        loaders: [
-            { test: /\.tsx?$/, loader: "awesome-typescript-loader" }
+        rules: [
+            {
+                test: /\.ts$/,
+                loader: "ts-loader"
+            }
         ]
     },
 
@@ -65,4 +81,7 @@ var serverConfig = {
     ]
 };
 
-module.exports = [clientConfig, serverConfig];
+module.exports = [
+    clientConfig,
+    serverConfig
+];
