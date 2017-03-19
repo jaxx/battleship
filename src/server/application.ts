@@ -55,7 +55,8 @@ export class Application {
         this.app.use("/js", this.static("node_modules/jquery/dist"));
         this.app.use("/js", this.static("node_modules/jquery-ui-dist"));
         this.app.use("/js", this.static("node_modules/vue/dist"));
-        this.app.use("/js", this.static("node_modules/vue-class-component/dist"))
+        this.app.use("/js", this.static("node_modules/vue-class-component/dist"));
+        this.app.use("/js", this.static("node_modules/vuex/dist"));
         this.app.use("/css", this.static("node_modules/bootstrap/dist/css"));
         this.app.use("/css", this.static("node_modules/jquery-ui-dist"));
         this.app.use("/fonts", this.static("node_modules/bootstrap/fonts"));

@@ -4,7 +4,11 @@ import { Component, Watch } from "vue-property-decorator";
 import * as CommonMessages from "../../common/messages";
 import * as ClientMessages from "../clientmessages";
 
-@Component
+import { store } from "../store";
+
+@Component({
+    store: store
+})
 export default class App extends Vue {
     socket = io();
     conversation: ClientMessages.Message[] = [];

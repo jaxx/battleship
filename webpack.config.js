@@ -42,7 +42,8 @@ var clientConfig = {
         "jquery": "jQuery",
         "socket.io-client": "io",
         "vue": "Vue",
-        "vue-class-component": "VueClassComponent"
+        "vue-class-component": "VueClassComponent",
+        "vuex": "Vuex"
     }
 };
 

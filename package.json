@@ -32,7 +32,8 @@
     "simple-git": "^1.67.0",
     "socket.io": "^1.7.3",
     "vue": "^2.2.4",
-    "vue-class-component": "^5.0.0"
+    "vue-class-component": "^5.0.0",
+    "vuex": "^2.2.1"
   },
   "devDependencies": {
     "@types/body-parser": "^1.16.0",
